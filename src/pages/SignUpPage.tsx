@@ -1,5 +1,9 @@
 import { Label } from "../components/ui/Label";
-import { ScrollText, Shield } from "lucide-react";
+import {
+  ArrowLeft,
+  ScrollText,
+  Shield,
+} from "lucide-react";
 import { Button } from "../components/ui/Button";
 import {
   Card,
@@ -31,8 +35,14 @@ const SignUpPage = () => {
   const onSubmit = (data: FormData) => console.log(data);
 
   return (
-    <div className="min-h-screen bg-background bg-mystic-pattern flex items-center justify-center p-4">
-      <Card className="w-full max-w-md border-border/50 bg-card/95 backdrop-blur">
+    <div className=" min-h-screen bg-background bg-mystic-pattern flex items-center justify-center p-4">
+      <Card className="relative w-full max-w-md border-border/50 bg-card/95 backdrop-blur">
+        <Link
+          to="/"
+          className="absolute top-5 left-5 block py-3 font-display text-sm tracking-wide text-muted-foreground hover:text-primary transition-colors"
+        >
+          <ArrowLeft />
+        </Link>
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">
             <div className="p-3 bg-primary/20 rounded-full">
