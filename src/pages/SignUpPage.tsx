@@ -1,6 +1,5 @@
 import { Label } from "../components/ui/Label";
-import { Shield, Sword } from "lucide-react";
-import { Link } from "react-router";
+import { ScrollText, Shield } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import {
   Card,
@@ -10,6 +9,7 @@ import {
   CardContent,
 } from "../components/ui/Card";
 import { Input } from "../components/ui/Input";
+import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 
 interface FormData {
@@ -18,10 +18,11 @@ interface FormData {
   email: string;
   password: string;
 }
-
-const LoginPage = () => {
+const SignUpPage = () => {
   const { register, handleSubmit } = useForm<FormData>({
     defaultValues: {
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
     },
@@ -48,6 +49,30 @@ const LoginPage = () => {
 
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-foreground">
+                First Name
+              </Label>
+              <Input
+                {...register("firstName")}
+                id="firstName"
+                type="text"
+                placeholder="John"
+                className="bg-input border-border"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-foreground">
+                Last Name
+              </Label>
+              <Input
+                id="lastName"
+                type="text"
+                placeholder="Doe"
+                {...register("lastName")}
+                className="bg-input border-border"
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="email" className="text-foreground">
                 Email
@@ -80,14 +105,14 @@ const LoginPage = () => {
               variant="mystic"
               //   disabled={isSubmitting}
             >
-              <Sword className="mr-2 h-4 w-4" />
-              Enter the Hoard
+              <ScrollText className="mr-2 h-4 w-4" />
+              Join the Guild
             </Button>
           </form>
 
           <div className="mt-6 text-center">
             <Link
-              to="/signup"
+              to="/login"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               New to the realm? Create an account
@@ -99,4 +124,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
