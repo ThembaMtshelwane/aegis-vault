@@ -1,6 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap");
 @import "tailwindcss";
 
 @theme {
+  /* Font Families */
+  --font-display: "Cinzel", serif;
+  --font-body: "Crimson Text", serif;
+
   /* Mystical Autumn Palette */
   --color-background: hsl(30 15% 8%);
   --color-foreground: hsl(39 35% 85%);
