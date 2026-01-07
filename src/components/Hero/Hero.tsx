@@ -39,8 +39,8 @@ const Hero = () => {
             className="font-display text-4xl md:text-6xl lg:text-7xl tracking-wide mb-6 animate-fade-in"
             style={{ animationDelay: "0.2s" }}
           >
-            <span className="text-gradient-gold">Mystic</span>{" "}
-            <span className="text-foreground">Emporium</span>
+            <span className="text-gradient-gold">Aegis</span>{" "}
+            <span className="text-foreground">Vault</span>
           </h1>
 
           {/* Description */}
