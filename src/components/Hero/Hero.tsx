@@ -1,6 +1,7 @@
 import heroBg from "../../assets/hero-bg.jpg";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { Button } from "../ui/Button";
+import Navbar from "./Navbar";
 
 const Hero = () => {
   return (
@@ -12,6 +13,8 @@ const Hero = () => {
       >
         <div className="absolute inset-0 bg-linear-to-b from-background/70 via-background/50 to-background" />
       </div>
+
+      <Navbar/>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center pt-20">
