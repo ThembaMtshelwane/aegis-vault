@@ -17,7 +17,7 @@ export const buttonVariants = cva(
         ghost: "hover:bg-muted hover:text-accent",
         link: "text-primary underline-offset-4 hover:underline",
         mystic:
-          "bg-gradient-to-r from-primary to-ember text-primary-foreground shadow-glow hover:shadow-mystic hover:scale-105",
+          "bg-gradient-to-r from-primary to-ember text-primary-foreground shadow-glow hover:shadow-mystic hover:scale-105 gap-2",
         gold: "bg-gradient-to-r from-gold to-accent text-accent-foreground shadow-mystic hover:shadow-glow hover:scale-105 font-semibold",
       },
       size: {
