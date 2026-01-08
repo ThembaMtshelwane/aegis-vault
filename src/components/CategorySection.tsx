@@ -30,7 +30,7 @@ const categories = [
 const CategorySection = () => {
   return (
     <section className="py-20 md:py-28 bg-muted">
-      <div className="container mx-auto px-4">
+      <div className="lg:container  mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-14">
           <h2 className="font-display text-3xl md:text-4xl tracking-wide text-foreground mb-4">

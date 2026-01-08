@@ -5,7 +5,7 @@ import { products } from "../../data/products";
 const FeaturedProducts = () => {
   return (
     <section id="featured" className="py-20 md:py-28 bg-mystic-pattern">
-      <div className="container mx-auto px-4">
+      <div className="lg:container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-14">
           <div className="flex items-center justify-center gap-3 mb-4">

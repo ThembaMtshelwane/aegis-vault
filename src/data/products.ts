@@ -20,7 +20,7 @@ export const products: Product[] = [
     price: 24000,
     category: "Weapon",
     image:
-      "https://images.unsplash.com/photo-1528711832280-f6840c696d7d?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1592500595497-d1f7858647bc?w=400&h=400&fit=crop",
     description:
       "This legendary blade hums with arcane energy. On a natural 20, it decapitates the target instantly.",
     rarity: "Legendary",
@@ -37,7 +37,7 @@ export const products: Product[] = [
     price: 800,
     category: "Armor",
     image:
-      "https://images.unsplash.com/photo-1562751362-404243c2eea3?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1535681009-c5e0fb9c147e?w=400&h=400&fit=crop",
     description:
       "Forged by dwarven smiths, this lightweight armor offers protection without hindering stealth.",
     rarity: "Rare",
@@ -50,7 +50,7 @@ export const products: Product[] = [
     price: 4000,
     category: "Maps",
     image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop",
     description:
       "This bag has an interior space considerably larger than its outside dimensions.",
     rarity: "Rare",
@@ -63,7 +63,7 @@ export const products: Product[] = [
     price: 100,
     category: "Spell Component",
     image:
-      "https://images.unsplash.com/photo-1551122089-4e3e72477432?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1506630448388-4e683c67dab0?w=400&h=400&fit=crop",
     description:
       "Finely ground diamond powder, essential for resurrection magic and protective wards.",
     rarity: "Common",
@@ -80,7 +80,7 @@ export const products: Product[] = [
     price: 50000,
     category: "Tome",
     image:
-      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1495640452828-3df6795cf69b?w=400&h=400&fit=crop",
     description:
       "This ancient tome contains memory and logic exercises. Reading it increases your Intelligence.",
     rarity: "Very Rare",
@@ -97,7 +97,7 @@ export const products: Product[] = [
     price: 5000,
     category: "Maps",
     image:
-      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
     description:
       "Woven with elven magic, this cloak shifts colors to match your surroundings.",
     rarity: "Rare",
@@ -114,7 +114,7 @@ export const products: Product[] = [
     price: 12000,
     category: "Weapon",
     image:
-      "https://images.unsplash.com/photo-1555400082-dd62d8fea4fe?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1583912267550-a88611dada67?w=400&h=400&fit=crop",
     description:
       "When you speak this sword's command word, flames erupt from the blade.",
     rarity: "Rare",
@@ -131,7 +131,7 @@ export const products: Product[] = [
     price: 48000,
     category: "Armor",
     image:
-      "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1604881991720-f91add269bed?w=400&h=400&fit=crop",
     description:
       "This ornate plate armor allows the wearer to become ethereal.",
     rarity: "Legendary",
@@ -144,7 +144,7 @@ export const products: Product[] = [
     price: 6000,
     category: "Maps",
     image:
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=400&h=400&fit=crop",
     description:
       "This lustrous black pearl allows you to regain an expended spell slot.",
     rarity: "Rare",
@@ -161,7 +161,7 @@ export const products: Product[] = [
     price: 500,
     category: "Spell Component",
     image:
-      "https://images.unsplash.com/photo-1583937443566-6ae2eaa1679c?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&fit=crop",
     description:
       "Crushed ruby of the finest quality, used in powerful conjuration and abjuration spells.",
     rarity: "Rare",
@@ -178,7 +178,7 @@ export const products: Product[] = [
     price: 50000,
     category: "Tome",
     image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=400&fit=crop",
     description:
       "This tome describes fitness exercises and dietary instructions for improving physical health.",
     rarity: "Very Rare",
@@ -195,7 +195,7 @@ export const products: Product[] = [
     price: 3500,
     category: "Maps",
     image:
-      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop",
     description: "A simple silver ring inscribed with protective runes.",
     rarity: "Rare",
     requiresAttunement: true,

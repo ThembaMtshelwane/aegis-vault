@@ -12,7 +12,7 @@ interface ShopProductCardProps {
 
 const ShopProductCard = ({ product }: ShopProductCardProps) => {
   return (
-    <Card variant="mystic" className="group overflow-hidden">
+    <Card variant="mystic" className="group overflow-hidden ">
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden">
         <img
@@ -65,13 +65,13 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
         <h3 className="font-display text-lg tracking-wide text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
           {product.name}
         </h3>
-        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed truncate">
           {product.description}
         </p>
       </CardContent>
 
       <CardFooter className="flex flex-col items-start gap-2 md:flex-row justify-between md:items-center">
-        <span className="font-display  text-gold md:text-xl">
+        <span className="font-display text-gold text-xl sm:text-sm xl:text-lg">
           R{" "}
           {new Intl.NumberFormat("en-ZA", {
             minimumFractionDigits: 2,
@@ -81,7 +81,7 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
         <div>
           <Button variant="gold" size="sm" className="flex-1">
             <ShoppingCart className="w-5 h-5 mr-2" />
-            <p className="text-sm"> Add to Cart</p>
+            Add to Cart
           </Button>
         </div>
       </CardFooter>
