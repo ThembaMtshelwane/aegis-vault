@@ -11,13 +11,21 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags:["User"]
+      invalidatesTags: ["User"],
     }),
     getMe: builder.query<User, void>({
-      query: () => `${AUTH_URL}/profile`,
+      query: () => `users/profile`,
       providesTags: ["User"],
+    }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: `${AUTH_URL}/logout`,
+        method: "POST",
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const { useLoginMutation, useGetMeQuery } = authApiSlice;
+export const { useLoginMutation, useGetMeQuery, useLogoutMutation } =
+  authApiSlice;

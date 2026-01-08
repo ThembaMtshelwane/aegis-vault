@@ -1,10 +1,19 @@
 import { ShoppingCart, Menu, Sparkles, LogOut, LogIn } from "lucide-react";
 import { Button } from "../../components/ui/Button";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import {
+  logOut,
+  selectCurrentUser,
+} from "../../store/features/auth/auth.slice";
+import { useLogoutMutation } from "../../store/features/auth/authApi.slice";
+import type { ApiError } from "../../types/error.types";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -13,8 +22,17 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
-  const user = null;
-  const signOut = () => console.log("sign out");
+  const user = useSelector(selectCurrentUser);
+  const signOut = async () => {
+    try {
+      const res = await logout();
+      console.log(res);
+      logOut();
+      navigate("/");
+    } catch (error) {
+      console.log((error as ApiError).data.message);
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">

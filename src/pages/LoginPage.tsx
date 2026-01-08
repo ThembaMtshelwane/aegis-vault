@@ -14,10 +14,14 @@ import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../store/features/auth/authApi.slice";
 import type { LoginCredentials } from "../types/auth.types";
 import type { ApiError } from "../types/error.types";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/features/auth/auth.slice";
 
 const LoginPage = () => {
-  const [login, { isLoading, isSuccess }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const { register, handleSubmit } = useForm<LoginCredentials>({
     defaultValues: {
       email: "",
@@ -27,9 +31,11 @@ const LoginPage = () => {
 
   const onSubmit = async (data: LoginCredentials) => {
     try {
-      await login(data).unwrap();
-      if (isSuccess) navigate("/shop");
+      const userData = await login(data).unwrap();
+      dispatch(setCredentials(userData));
+      navigate("/shop");
     } catch (error) {
+      console.log("error");
       console.log((error as ApiError).data.message);
     }
   };
