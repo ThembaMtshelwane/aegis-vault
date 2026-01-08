@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { Card, CardContent, CardFooter } from "../ui/Card";
 import { Button } from "../ui/Button";
-import { Eye, Sparkles } from "lucide-react";
+import { Eye, ShoppingCart, Sparkles } from "lucide-react";
 import { type Product, rarityColors } from "../../data/products";
 import { cn } from "../../lib/utils";
 import { Badge } from "../ui/Badge";
@@ -72,13 +72,18 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
 
       <CardFooter className="flex items-center justify-between">
         <span className="font-display text-xl text-gold">
-          {product.price.toLocaleString()} gp
+          R{" "}
+          {new Intl.NumberFormat("en-ZA", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(product.price)}
         </span>
-        <Link to={`/shop/${product.id}`}>
-          <Button variant="outline" size="sm">
-            Details
+        <div>
+          <Button variant="gold" size="default" className="flex-1">
+            <ShoppingCart className="w-5 h-5 mr-2" />
+            Add to Cart
           </Button>
-        </Link>
+        </div>
       </CardFooter>
     </Card>
   );

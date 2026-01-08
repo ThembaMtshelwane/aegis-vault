@@ -115,10 +115,11 @@ const ProductDetail = () => {
               <div className="border-t border-border pt-6 space-y-4">
                 <div className="flex items-baseline gap-2">
                   <span className="font-display text-4xl text-gold">
-                    {product.price.toLocaleString()}
-                  </span>
-                  <span className="text-xl text-muted-foreground">
-                    gold pieces
+                    R{" "}
+                    {new Intl.NumberFormat("en-ZA", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }).format(product.price)}
                   </span>
                 </div>
 
