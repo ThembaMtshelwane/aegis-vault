@@ -1,10 +1,5 @@
-export type Rarity = "Common" | "Uncommon" | "Rare" | "Very Rare" | "Legendary";
-export type ItemType =
-  | "Weapon"
-  | "Armor"
-  | "Wondrous Item"
-  | "Spell Component"
-  | "Tome";
+export type Rarity = "Common" | "Rare" | "Very Rare" | "Legendary";
+export type ItemType = "Weapon" | "Armor" | "Maps" | "Spell Component" | "Tome";
 
 export interface Product {
   id: string;
@@ -45,7 +40,7 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1562751362-404243c2eea3?w=400&h=400&fit=crop",
     description:
       "Forged by dwarven smiths, this lightweight armor offers protection without hindering stealth.",
-    rarity: "Uncommon",
+    rarity: "Rare",
     requiresAttunement: false,
     stats: ["AC 16", "No Stealth disadvantage", "No Strength requirement"],
   },
@@ -53,12 +48,12 @@ export const products: Product[] = [
     id: "3",
     name: "Bag of Holding",
     price: 4000,
-    category: "Wondrous Item",
+    category: "Maps",
     image:
       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
     description:
       "This bag has an interior space considerably larger than its outside dimensions.",
-    rarity: "Uncommon",
+    rarity: "Rare",
     requiresAttunement: false,
     stats: ["Holds 500 lbs", "64 cubic feet capacity", "Weighs only 15 lbs"],
   },
@@ -100,12 +95,12 @@ export const products: Product[] = [
     id: "6",
     name: "Cloak of Elvenkind",
     price: 5000,
-    category: "Wondrous Item",
+    category: "Maps",
     image:
       "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=400&fit=crop",
     description:
       "Woven with elven magic, this cloak shifts colors to match your surroundings.",
-    rarity: "Uncommon",
+    rarity: "Rare",
     requiresAttunement: true,
     stats: [
       "Advantage on Stealth checks",
@@ -147,12 +142,12 @@ export const products: Product[] = [
     id: "9",
     name: "Pearl of Power",
     price: 6000,
-    category: "Wondrous Item",
+    category: "Maps",
     image:
       "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop",
     description:
       "This lustrous black pearl allows you to regain an expended spell slot.",
-    rarity: "Uncommon",
+    rarity: "Rare",
     requiresAttunement: true,
     stats: [
       "Regain 1 spell slot (3rd or lower)",
@@ -169,7 +164,7 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1583937443566-6ae2eaa1679c?w=400&h=400&fit=crop",
     description:
       "Crushed ruby of the finest quality, used in powerful conjuration and abjuration spells.",
-    rarity: "Uncommon",
+    rarity: "Rare",
     requiresAttunement: false,
     stats: [
       "Used in Forbiddance",
@@ -198,7 +193,7 @@ export const products: Product[] = [
     id: "12",
     name: "Ring of Protection",
     price: 3500,
-    category: "Wondrous Item",
+    category: "Maps",
     image:
       "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=400&fit=crop",
     description: "A simple silver ring inscribed with protective runes.",
@@ -210,7 +205,6 @@ export const products: Product[] = [
 
 export const rarityColors: Record<Rarity, string> = {
   Common: "bg-muted text-muted-foreground",
-  Uncommon: "bg-secondary text-secondary-foreground",
   Rare: "bg-blue-900/50 text-blue-300 border-blue-500/30",
   "Very Rare": "bg-purple-900/50 text-purple-300 border-purple-500/30",
   Legendary:
