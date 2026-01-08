@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { products, type ItemType, type Rarity } from "../../data/products";
 import ProductFilter from "../../components/Products/ProductFilter";
+import ShopProductCard from "../../components/shop/ShopProductCard";
 
 const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -58,7 +59,7 @@ const Shop = () => {
             </aside>
 
             {/* Products Grid */}
-            <section className="lg:col-span-3 border">
+            <section className="lg:col-span-3">
               <div className="flex justify-between items-center mb-6">
                 <p className="text-muted-foreground">
                   Showing{" "}
@@ -72,7 +73,7 @@ const Shop = () => {
               {filteredProducts.length > 0 ? (
                 <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {filteredProducts.map((product) => (
-                      <div>{ product.name}</div>
+                    <ShopProductCard product={product} />
                   ))}
                 </div>
               ) : (
