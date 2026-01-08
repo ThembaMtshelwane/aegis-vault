@@ -16,7 +16,7 @@ const rarities: Rarity[] = ["Common", "Rare", "Very Rare", "Legendary"];
 const categories: ItemType[] = [
   "Weapon",
   "Armor",
-  "Maps",
+  "Item",
   "Spell Component",
   "Tome",
 ];

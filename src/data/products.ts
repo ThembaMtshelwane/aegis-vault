@@ -1,5 +1,5 @@
 export type Rarity = "Common" | "Rare" | "Very Rare" | "Legendary";
-export type ItemType = "Weapon" | "Armor" | "Maps" | "Spell Component" | "Tome";
+export type ItemType = "Weapon" | "Armor" | "Item" | "Spell Component" | "Tome";
 
 export interface Product {
   id: string;
@@ -20,7 +20,7 @@ export const products: Product[] = [
     price: 24000,
     category: "Weapon",
     image:
-      "https://images.unsplash.com/photo-1592500595497-d1f7858647bc?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/736x/06/a9/4a/06a94aa2dc6c03b7ffb801062d6f3cf6.jpg",
     description:
       "This legendary blade hums with arcane energy. On a natural 20, it decapitates the target instantly.",
     rarity: "Legendary",
@@ -37,7 +37,7 @@ export const products: Product[] = [
     price: 800,
     category: "Armor",
     image:
-      "https://images.unsplash.com/photo-1535681009-c5e0fb9c147e?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/1200x/bf/d4/85/bfd48562c39ac1e4c8bde3b78d473891.jpg",
     description:
       "Forged by dwarven smiths, this lightweight armor offers protection without hindering stealth.",
     rarity: "Rare",
@@ -48,9 +48,9 @@ export const products: Product[] = [
     id: "3",
     name: "Bag of Holding",
     price: 4000,
-    category: "Maps",
+    category: "Item",
     image:
-      "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/736x/72/21/ce/7221ce60dacf031e1653aa96fab9416b.jpg",
     description:
       "This bag has an interior space considerably larger than its outside dimensions.",
     rarity: "Rare",
@@ -59,11 +59,11 @@ export const products: Product[] = [
   },
   {
     id: "4",
-    name: "Diamond Dust (100gp)",
+    name: "Diamond Dust",
     price: 100,
     category: "Spell Component",
     image:
-      "https://images.unsplash.com/photo-1506630448388-4e683c67dab0?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/1200x/c4/21/40/c42140b924c74ff683bcf4d70f1d5378.jpg",
     description:
       "Finely ground diamond powder, essential for resurrection magic and protective wards.",
     rarity: "Common",
@@ -80,7 +80,7 @@ export const products: Product[] = [
     price: 50000,
     category: "Tome",
     image:
-      "https://images.unsplash.com/photo-1495640452828-3df6795cf69b?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/736x/18/a9/f6/18a9f6f7a9791917bea3f608a0274e25.jpg",
     description:
       "This ancient tome contains memory and logic exercises. Reading it increases your Intelligence.",
     rarity: "Very Rare",
@@ -95,9 +95,9 @@ export const products: Product[] = [
     id: "6",
     name: "Cloak of Elvenkind",
     price: 5000,
-    category: "Maps",
+    category: "Item",
     image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/736x/6b/a4/0a/6ba40a7e074f98c4125475806642b900.jpg",
     description:
       "Woven with elven magic, this cloak shifts colors to match your surroundings.",
     rarity: "Rare",
@@ -114,7 +114,7 @@ export const products: Product[] = [
     price: 12000,
     category: "Weapon",
     image:
-      "https://images.unsplash.com/photo-1583912267550-a88611dada67?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/736x/60/fc/fc/60fcfc5a9e617c99d94540f2cb83469b.jpg",
     description:
       "When you speak this sword's command word, flames erupt from the blade.",
     rarity: "Rare",
@@ -131,7 +131,7 @@ export const products: Product[] = [
     price: 48000,
     category: "Armor",
     image:
-      "https://images.unsplash.com/photo-1604881991720-f91add269bed?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/736x/3c/80/df/3c80dffc34dfa1d9429bdf02e67ae1e0.jpg",
     description:
       "This ornate plate armor allows the wearer to become ethereal.",
     rarity: "Legendary",
@@ -142,9 +142,9 @@ export const products: Product[] = [
     id: "9",
     name: "Pearl of Power",
     price: 6000,
-    category: "Maps",
+    category: "Item",
     image:
-      "https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/1200x/a6/c3/ce/a6c3ce2f97a48544368201efe60c5258.jpg",
     description:
       "This lustrous black pearl allows you to regain an expended spell slot.",
     rarity: "Rare",
@@ -161,7 +161,7 @@ export const products: Product[] = [
     price: 500,
     category: "Spell Component",
     image:
-      "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/1200x/10/fe/78/10fe78aa207e5a8c6ffcf5d7b551f92c.jpg",
     description:
       "Crushed ruby of the finest quality, used in powerful conjuration and abjuration spells.",
     rarity: "Rare",
@@ -178,7 +178,7 @@ export const products: Product[] = [
     price: 50000,
     category: "Tome",
     image:
-      "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/1200x/36/78/26/3678264a9d7fb91a4b02bc3fc829b1d2.jpg",
     description:
       "This tome describes fitness exercises and dietary instructions for improving physical health.",
     rarity: "Very Rare",
@@ -193,9 +193,9 @@ export const products: Product[] = [
     id: "12",
     name: "Ring of Protection",
     price: 3500,
-    category: "Maps",
+    category: "Item",
     image:
-      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop",
+      "https://i.pinimg.com/1200x/95/c6/ce/95c6cecdd08d8df5b66891e733c8d71e.jpg",
     description: "A simple silver ring inscribed with protective runes.",
     rarity: "Rare",
     requiresAttunement: true,

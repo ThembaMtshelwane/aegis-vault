@@ -37,7 +37,7 @@ const Cart = () => {
         id: "3",
         name: "Bag of Holding",
         price: 4000,
-        category: "Maps",
+        category: "Item",
         image:
           "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
         description:
