@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { products, type ItemType, type Rarity } from "../../data/products";
-import ProductFilter from "../../components/Products/ProductFilter";
-import ShopProductCard from "../../components/shop/ShopProductCard";
+import { products, type ItemType, type Rarity } from "../data/products";
+import ProductFilter from "../components/Products/ProductFilter";
+import ShopProductCard from "../components/shop/ShopProductCard";
 
 const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
