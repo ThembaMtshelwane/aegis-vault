@@ -2,7 +2,10 @@ import { Sparkles, Moon, Star } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-muted border-t border-border py-12 md:py-16">
+    <footer
+      id="contact"
+      className="bg-muted border-t border-border py-12 md:py-16"
+    >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand */}

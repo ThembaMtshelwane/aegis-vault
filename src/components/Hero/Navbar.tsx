@@ -7,10 +7,10 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Trinkets", href: "#trinkets" },
-    { name: "Collectibles", href: "#collectibles" },
-    { name: "Ancient Tomes", href: "#books" },
     { name: "About", href: "#about" },
+    { name: "Artifacts", href: "#featured" },
+    { name: "Categories", href: "#categories" },
+    { name: "Contact", href: "#contact" },
   ];
 
   const user = null;
