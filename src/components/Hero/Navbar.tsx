@@ -1,6 +1,7 @@
 import { ShoppingCart, Menu, Sparkles, LogOut, LogIn } from "lucide-react";
 import { Button } from "../../components/ui/Button";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,12 +43,12 @@ const Navbar = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-2 gap-x-6">
-            <Button variant="ghost" size="icon" className="relative">
+            <Link to="/cart" className="relative">
               <ShoppingCart className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-display">
+              {/* <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-display">
                 3
-              </span>
-            </Button>
+              </span> */}
+            </Link>
 
             {user ? (
               <Button
