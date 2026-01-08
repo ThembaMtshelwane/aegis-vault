@@ -1,6 +1,6 @@
 import { Label } from "../components/ui/Label";
 import { ArrowLeft, Shield, Sword } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Button } from "../components/ui/Button";
 import {
   Card,
@@ -11,23 +11,28 @@ import {
 } from "../components/ui/Card";
 import { Input } from "../components/ui/Input";
 import { useForm } from "react-hook-form";
-
-interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
+import { useLoginMutation } from "../store/features/auth/authApi.slice";
+import type { LoginCredentials } from "../types/auth.types";
+import type { ApiError } from "../types/error.types";
 
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm<FormData>({
+  const [login, { isLoading, isSuccess }] = useLoginMutation();
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm<LoginCredentials>({
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = async (data: LoginCredentials) => {
+    try {
+      await login(data).unwrap();
+      if (isSuccess) navigate("/shop");
+    } catch (error) {
+      console.log((error as ApiError).data.message);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background bg-mystic-pattern flex items-center justify-center p-4">
@@ -84,7 +89,7 @@ const LoginPage = () => {
               type="submit"
               className="w-full"
               variant="mystic"
-              //   disabled={isSubmitting}
+              disabled={isLoading}
             >
               <Sword className="mr-2 h-4 w-4" />
               Enter the Hoard
