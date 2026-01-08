@@ -120,7 +120,7 @@ const Cart = () => {
             {items.map(({ product, quantity }) => (
               <Card
                 key={product.id}
-                className="p-4 bg-card/50 border-border flex gap-4"
+                className="p-4 bg-card/50 border-border flex gap-4 flex-col sm:flex-row"
               >
                 <div className="w-24 h-24 rounded-lg overflow-hidden shrink-0">
                   <img

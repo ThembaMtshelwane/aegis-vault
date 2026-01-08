@@ -70,8 +70,8 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
         </p>
       </CardContent>
 
-      <CardFooter className="flex items-center justify-between">
-        <span className="font-display text-xl text-gold">
+      <CardFooter className="flex flex-col items-start gap-2 md:flex-row justify-between md:items-center">
+        <span className="font-display  text-gold md:text-xl">
           R{" "}
           {new Intl.NumberFormat("en-ZA", {
             minimumFractionDigits: 2,
@@ -79,9 +79,9 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
           }).format(product.price)}
         </span>
         <div>
-          <Button variant="gold" size="default" className="flex-1">
+          <Button variant="gold" size="sm" className="flex-1">
             <ShoppingCart className="w-5 h-5 mr-2" />
-            Add to Cart
+            <p className="text-sm"> Add to Cart</p>
           </Button>
         </div>
       </CardFooter>
