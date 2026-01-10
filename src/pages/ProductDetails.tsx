@@ -5,13 +5,15 @@ import { Card, CardContent } from "../components/ui/Card";
 import { rarityColors } from "../data/products";
 import { cn } from "../lib/utils";
 import { Badge } from "../components/ui/Badge";
-import { useGetProductsQuery } from "../store/features/product";
+import { useGetProductQuery } from "../store/features/product";
+import { skipToken } from "@reduxjs/toolkit/query";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { data: productsData, isLoading } = useGetProductsQuery({});
 
-  const product = productsData?.data.data.find((p) => p._id === id);
+  const { data: product, isLoading } = useGetProductQuery(id ?? skipToken);
+
+  console.log("Product Data:", product);
 
   if (isLoading) {
     return (
@@ -66,8 +68,8 @@ const ProductDetail = () => {
             <div className="relative">
               <div className="aspect-square rounded-lg overflow-hidden border border-border bg-card">
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={product.data?.image}
+                  alt={product.data?.name}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -76,12 +78,14 @@ const ProductDetail = () => {
                 <Badge
                   className={cn(
                     "text-sm font-display tracking-wide border",
-                    rarityColors[product.rarity]
+                    rarityColors[
+                      product.data?.rarity as keyof typeof rarityColors
+                    ]
                   )}
                 >
-                  {product.rarity}
+                  {product.data?.rarity}
                 </Badge>
-                {product.requiresAttunement && (
+                {product.data?.requiresAttunement && (
                   <Badge
                     variant="outline"
                     className="bg-background/90 backdrop-blur-sm border-primary/50"
@@ -97,25 +101,25 @@ const ProductDetail = () => {
             <div className="space-y-6">
               <div>
                 <p className="text-sm font-display tracking-[0.2em] text-primary uppercase mb-2">
-                  {product.category}
+                  {product.data?.category}
                 </p>
                 <h1 className="font-display text-3xl md:text-4xl tracking-wide text-foreground mb-4">
-                  {product.name}
+                  {product.data?.name}
                 </h1>
                 <p className="text-muted-foreground leading-relaxed text-lg">
-                  {product.description}
+                  {product.data?.description}
                 </p>
               </div>
 
               {/* Stats Card */}
-              {product.stats && product.stats.length > 0 && (
+              {product.data?.stats && product.data.stats.length > 0 && (
                 <Card variant="mystic">
                   <CardContent className="pt-6">
                     <h3 className="font-display text-sm tracking-wider text-muted-foreground uppercase mb-4">
                       Item Properties
                     </h3>
                     <ul className="space-y-3">
-                      {product.stats.map((stat, index) => (
+                      {product.data?.stats.map((stat, index) => (
                         <li key={index} className="flex items-start gap-3">
                           <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                           <span className="text-foreground">{stat}</span>
@@ -134,7 +138,7 @@ const ProductDetail = () => {
                     {new Intl.NumberFormat("en-ZA", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
-                    }).format(product.price)}
+                    }).format(product.data?.price as number)}
                   </span>
                 </div>
 

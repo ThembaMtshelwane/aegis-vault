@@ -2,9 +2,10 @@ import { Link } from "react-router";
 import { Card, CardContent, CardFooter } from "../ui/Card";
 import { Button } from "../ui/Button";
 import { Eye, ShoppingCart, Sparkles } from "lucide-react";
-import { type Product, rarityColors } from "../../data/products";
+import { rarityColors } from "../../data/products";
 import { cn } from "../../lib/utils";
 import { Badge } from "../ui/Badge";
+import type { Product } from "../../types/product.types";
 
 interface ShopProductCardProps {
   product: Product;
@@ -22,7 +23,7 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
         />
         {/* Overlay */}
         <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-          <Link to={`/products/${product._id}`}>
+          <Link to={`/products/${product.slug}`}>
             <Button
               variant="gold"
               size="sm"

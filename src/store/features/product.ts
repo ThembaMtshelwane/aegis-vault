@@ -1,5 +1,9 @@
-import { type Product } from "../../data/products";
-import type { ApiPaginatedResponse, ProductQueryParams } from "../../types/api.types";
+import type { Product } from "../../types/product.types";
+import type {
+  ApiPaginatedResponse,
+  ApiResponse,
+  ProductQueryParams,
+} from "../../types/api.types";
 
 import { apiSlice } from "../app/api.slice";
 
@@ -34,9 +38,11 @@ export const productApiSlice = apiSlice.injectEndpoints({
 
         return `${PRODUCT_URL}?${queryParams.toString()}`;
       },
-
+    }),
+    getProduct: builder.query<ApiResponse<Product>, string>({
+      query: (slug:string) => `${PRODUCT_URL}/${slug}`,
     }),
   }),
 });
 
-export const { useGetProductsQuery } = productApiSlice;
+export const { useGetProductsQuery, useGetProductQuery } = productApiSlice;

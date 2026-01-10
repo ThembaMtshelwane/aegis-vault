@@ -1,10 +1,9 @@
-import type { ItemType, Rarity } from "../data/products";
+import type { ItemType, Rarity } from "./product.types";
 
 export interface ApiResponse<T> {
   message: string;
-  data?: T[];
+  data?: T | null;
 }
-
 
 export interface ApiPaginatedResponse<T> {
   message: string;

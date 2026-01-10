@@ -1,17 +1,4 @@
-export type Rarity = "Common" | "Rare" | "Very Rare" | "Legendary";
-export type ItemType = "Weapon" | "Armor" | "Item" | "Spell Component" | "Tome";
-
-export interface Product {
-  _id: string;
-  name: string;
-  price: number;
-  category: ItemType;
-  image: string;
-  description: string;
-  rarity: Rarity;
-  requiresAttunement: boolean;
-  stats?: string[];
-}
+import type { Rarity } from "../types/product.types";
 
 export const rarityColors: Record<Rarity, string> = {
   Common: "bg-muted text-muted-foreground",
