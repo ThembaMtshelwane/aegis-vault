@@ -4,6 +4,7 @@ import ProductFilter from "../components/Products/ProductFilter";
 import ShopProductCard from "../components/shop/ShopProductCard";
 import { useGetProductsQuery } from "../store/features/product";
 import type { ItemType, Rarity } from "../types/product.types";
+import Pagination from "../components/ui/Pagination";
 
 const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,6 +17,7 @@ const Shop = () => {
     rarity: selectedRarity || undefined,
     category: selectedCategory || undefined,
   });
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteredProducts = useMemo(() => {
     if (!productsData?.data.data) return [];
@@ -30,6 +32,26 @@ const Shop = () => {
       return matchesSearch && matchesRarity && matchesCategory;
     });
   }, [searchQuery, selectedRarity, selectedCategory, productsData]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  };
+
+  const handleRarityChange = (value: Rarity | null) => {
+    setSelectedRarity(value);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (value: ItemType | null) => {
+    setSelectedCategory(value);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,11 +80,11 @@ const Shop = () => {
                 </h2>
                 <ProductFilter
                   searchQuery={searchQuery}
-                  onSearchChange={setSearchQuery}
+                  onSearchChange={handleSearchChange}
                   selectedRarity={selectedRarity}
-                  onRarityChange={setSelectedRarity}
+                  onRarityChange={handleRarityChange}
                   selectedCategory={selectedCategory}
-                  onCategoryChange={setSelectedCategory}
+                  onCategoryChange={handleCategoryChange}
                 />
               </div>
             </aside>
@@ -74,7 +96,8 @@ const Shop = () => {
                 <p className="text-muted-foreground">
                   Showing{" "}
                   <span className="text-foreground font-medium">
-                    {filteredProducts?.length} of {productsData?.data.pagination.totalCount}
+                    {filteredProducts?.length} of{" "}
+                    {productsData?.data.pagination.totalCount}
                   </span>{" "}
                   items
                 </p>
@@ -98,6 +121,13 @@ const Shop = () => {
               )}
             </section>
           </div>
+
+          {/* Pagination */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={0}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
     </div>
