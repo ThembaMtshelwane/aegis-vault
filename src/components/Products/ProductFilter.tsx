@@ -1,7 +1,7 @@
 import { Search, X } from "lucide-react";
-import type { ItemType, Rarity } from "../../data/products";
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
+import type { ItemType, Rarity } from "../../types/product.types";
 
 interface ProductFiltersProps {
   searchQuery: string;

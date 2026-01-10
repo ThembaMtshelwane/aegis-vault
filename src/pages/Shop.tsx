@@ -74,7 +74,7 @@ const Shop = () => {
                 <p className="text-muted-foreground">
                   Showing{" "}
                   <span className="text-foreground font-medium">
-                    {filteredProducts?.length}
+                    {filteredProducts?.length} of {productsData?.data.pagination.totalCount}
                   </span>{" "}
                   items
                 </p>
