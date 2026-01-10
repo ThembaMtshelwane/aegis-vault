@@ -22,7 +22,7 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
         />
         {/* Overlay */}
         <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-          <Link to={`/products/${product.id}`}>
+          <Link to={`/products/${product._id}`}>
             <Button
               variant="gold"
               size="sm"

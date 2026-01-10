@@ -1,8 +1,11 @@
 import { Sparkles } from "lucide-react";
 import ShopProductCard from "../shop/ShopProductCard";
-import { products } from "../../data/products";
+import { useGetProductsQuery } from "../../store/features/product";
 
 const FeaturedProducts = () => {
+  const { data: productsData, isLoading, error } = useGetProductsQuery({});
+  const featured = productsData?.data?.data?.slice(0, 3) || [];
+
   return (
     <section id="featured" className="py-20 md:py-28 bg-mystic-pattern">
       <div className="lg:container mx-auto px-4">
@@ -23,17 +26,36 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
-          {products.slice(0, 3).map((product, index) => (
-            <div
-              key={product.id}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <ShopProductCard product={product} />
-            </div>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">
+              Loading featured products...
+            </p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-destructive mb-2">Failed to load products</p>
+            <p className="text-sm text-muted-foreground">
+              Please try again later
+            </p>
+          </div>
+        ) : featured.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
+            {featured.map((product, index) => (
+              <div
+                key={product._id}
+                className="animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <ShopProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No products available</p>
+          </div>
+        )}
       </div>
     </section>
   );

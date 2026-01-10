@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
-import { products, type ItemType, type Rarity } from "../data/products";
+import { type ItemType, type Rarity } from "../data/products";
 import ProductFilter from "../components/Products/ProductFilter";
 import ShopProductCard from "../components/shop/ShopProductCard";
+import { useGetProductsQuery } from "../store/features/product";
 
 const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -9,8 +10,21 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState<ItemType | null>(
     null
   );
+  const {
+    data: productsData,
+    isLoading,
+    error,
+  } = useGetProductsQuery({
+    search: searchQuery,
+    rarity: selectedRarity || undefined,
+    category: selectedCategory || undefined,
+  });
+
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    if (!productsData?.data?.data) {
+      return [];
+    }
+    return productsData?.data.data.filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -20,7 +34,7 @@ const Shop = () => {
         !selectedCategory || product.category === selectedCategory;
       return matchesSearch && matchesRarity && matchesCategory;
     });
-  }, [searchQuery, selectedRarity, selectedCategory]);
+  }, [searchQuery, selectedRarity, selectedCategory, productsData]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,35 +72,38 @@ const Shop = () => {
               </div>
             </aside>
 
+            {isLoading && <p>Loading products...</p>}
             {/* Products Grid */}
-            <section className="lg:col-span-3">
-              <div className="flex justify-between items-center mb-6">
+            {isLoading ? (
+              <div className="text-center py-12">
                 <p className="text-muted-foreground">
-                  Showing{" "}
-                  <span className="text-foreground font-medium">
-                    {filteredProducts.length}
-                  </span>{" "}
-                  items
+                  Loading featured products...
                 </p>
               </div>
-
-              {filteredProducts.length > 0 ? (
-                <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {filteredProducts.map((product) => (
-                    <ShopProductCard product={product} key={product.id}/>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-16">
-                  <p className="font-display text-xl text-muted-foreground mb-2">
-                    No items found
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Try adjusting your filters or search query.
-                  </p>
-                </div>
-              )}
-            </section>
+            ) : error ? (
+              <div className="text-center py-12">
+                <p className="text-destructive mb-2">Failed to load products</p>
+                <p className="text-sm text-muted-foreground">
+                  Please try again later
+                </p>
+              </div>
+            ) : filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
+                {filteredProducts.map((product, index) => (
+                  <div
+                    key={product._id}
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <ShopProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No products available</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

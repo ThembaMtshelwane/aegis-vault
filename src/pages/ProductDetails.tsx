@@ -2,13 +2,28 @@ import { ArrowLeft, Sparkles, Check, ShoppingCart } from "lucide-react";
 import { useParams, Link } from "react-router";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
-import { products, rarityColors } from "../data/products";
+import { rarityColors } from "../data/products";
 import { cn } from "../lib/utils";
 import { Badge } from "../components/ui/Badge";
+import { useGetProductsQuery } from "../store/features/product";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+  const { data: productsData, isLoading } = useGetProductsQuery({});
+
+  const product = productsData?.data.data.find((p) => p._id === id);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="pt-24 pb-16">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-muted-foreground">Loading item details...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
