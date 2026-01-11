@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <section>
       <Navbar />
-      <main>
+      <main className="min-h-screen bg-background">
         <Outlet />
       </main>
       <Footer />
