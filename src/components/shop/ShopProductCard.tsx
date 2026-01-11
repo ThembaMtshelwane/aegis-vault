@@ -6,12 +6,23 @@ import { rarityColors } from "../../data/products";
 import { cn } from "../../lib/utils";
 import { Badge } from "../ui/Badge";
 import type { Product } from "../../types/product.types";
+import { useAddToCartMutation } from "../../store/cart";
 
 interface ShopProductCardProps {
   product: Product;
 }
 
 const ShopProductCard = ({ product }: ShopProductCardProps) => {
+  const [addToCart] = useAddToCartMutation();
+
+  const handleAddToCart = async () => {
+    try {
+      await addToCart({ productId: product._id, quantity: 1 }).unwrap();
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+    }
+  };
+
   return (
     <Card variant="mystic" className="group overflow-hidden ">
       {/* Image Container */}
@@ -80,7 +91,12 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
           }).format(product.price)}
         </span>
         <div>
-          <Button variant="gold" size="sm" className="flex-1">
+          <Button
+            variant="gold"
+            size="sm"
+            className="flex-1"
+            onClick={handleAddToCart}
+          >
             <ShoppingCart className="w-5 h-5 mr-2" />
             Add to Cart
           </Button>

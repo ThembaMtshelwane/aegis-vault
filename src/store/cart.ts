@@ -1,7 +1,7 @@
 import type { ICart } from "../types/cart.types";
 import { apiSlice } from "./app/api.slice";
 
-const CART_URL = "/cart/";
+const CART_URL = "cart";
 
 export const cartApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,7 +9,17 @@ export const cartApiSlice = apiSlice.injectEndpoints({
       query: () => CART_URL,
       providesTags: ["Cart"],
     }),
+    addToCart: builder.mutation<ICart, { productId: string; quantity: number }>(
+      {
+        query: ({ productId, quantity }) => ({
+          url: `${CART_URL}/add`,
+          method: "POST",
+          body: { productId, quantity },
+        }),
+        invalidatesTags: ["Cart"],
+      }
+    ),
   }),
 });
 
-export const { useGetCartQuery } = cartApiSlice;
+export const { useGetCartQuery, useAddToCartMutation } = cartApiSlice;
