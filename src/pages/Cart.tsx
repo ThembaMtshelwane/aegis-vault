@@ -1,21 +1,24 @@
 import { ArrowLeft, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
-import { rarityColors, type Product } from "../data/products";
+import { rarityColors } from "../data/products";
 import { useState } from "react";
 import { Link } from "react-router";
+import type { Product } from "../types/product.types";
 
 interface CartItem {
   product: Product;
   quantity: number;
+  price: number;
 }
 
 const Cart = () => {
   const [items, setItems] = useState<CartItem[]>([
     {
       product: {
-        id: "1",
+        _id: "1",
         name: "Vorpal Longsword +3",
+        slug: "vorpal-longsword-+3",
         price: 24000,
         category: "Weapon",
         image:
@@ -31,11 +34,13 @@ const Cart = () => {
         ],
       },
       quantity: 0,
+      price: 0,
     },
     {
       product: {
-        id: "3",
+        _id: "3",
         name: "Bag of Holding",
+        slug: "bag-of-holding",
         price: 4000,
         category: "Item",
         image:
@@ -51,11 +56,12 @@ const Cart = () => {
         ],
       },
       quantity: 0,
+      price: 0,
     },
   ]);
 
   const removeFromCart = (productId: string) => {
-    setItems((prev) => prev.filter((item) => item.product.id !== productId));
+    setItems((prev) => prev.filter((item) => item.product._id !== productId));
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
@@ -65,7 +71,7 @@ const Cart = () => {
     }
     setItems((prev) =>
       prev.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
+        item.product._id === productId ? { ...item, quantity } : item
       )
     );
   };
@@ -119,7 +125,7 @@ const Cart = () => {
           <div className="lg:col-span-2 space-y-4">
             {items.map(({ product, quantity }) => (
               <Card
-                key={product.id}
+                key={product._id}
                 className="p-4 bg-card/50 border-border flex gap-4 flex-col sm:flex-row"
               >
                 <div className="w-24 h-24 rounded-lg overflow-hidden shrink-0">
@@ -144,7 +150,7 @@ const Cart = () => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      onClick={() => removeFromCart(product.id)}
+                      onClick={() => removeFromCart(product._id)}
                       className="text-muted-foreground hover:text-destructive"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -156,7 +162,9 @@ const Cart = () => {
                         variant="outline"
                         size="icon"
                         className="h-8 w-8"
-                        onClick={() => updateQuantity(product.id, quantity - 1)}
+                        onClick={() =>
+                          updateQuantity(product._id, quantity - 1)
+                        }
                       >
                         <Minus className="w-3 h-3" />
                       </Button>
@@ -167,7 +175,9 @@ const Cart = () => {
                         variant="outline"
                         size="icon"
                         className="h-8 w-8"
-                        onClick={() => updateQuantity(product.id, quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(product._id, quantity + 1)
+                        }
                       >
                         <Plus className="w-3 h-3" />
                       </Button>
@@ -193,7 +203,7 @@ const Cart = () => {
               <div className="space-y-3 mb-6">
                 {items.map(({ product, quantity }) => (
                   <div
-                    key={product.id}
+                    key={product._id}
                     className="flex justify-between text-sm"
                   >
                     <span className="text-muted-foreground truncate pr-2">
