@@ -19,7 +19,35 @@ export const cartApiSlice = apiSlice.injectEndpoints({
         invalidatesTags: ["Cart"],
       }
     ),
+    incrementCartItem: builder.mutation<ICart, { productId: string }>({
+      query: ({ productId }) => ({
+        url: `${CART_URL}/increment`,
+        method: "POST",
+        body: { productId },
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+    decrementCartItem: builder.mutation<ICart, { productId: string }>({
+      query: ({ productId }) => ({
+        url: `${CART_URL}/decrement`,
+        method: "POST",
+        body: { productId },
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+    clearCart: builder.mutation<ICart, void>({
+      query: () => ({
+        url: `${CART_URL}/clear`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Cart"],
+    }),
   }),
 });
 
-export const { useGetCartQuery, useAddToCartMutation } = cartApiSlice;
+export const {
+  useGetCartQuery,
+  useAddToCartMutation,
+  useIncrementCartItemMutation,
+  useDecrementCartItemMutation,
+} = cartApiSlice;
