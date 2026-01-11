@@ -9,11 +9,13 @@ import Cart from "./pages/Cart";
 import { Provider } from "react-redux";
 import { store } from "./store/app/store";
 import AuthWrapper from "./store/features/auth/AuthWrapper";
+import ScrollToTop from "./components/ui/ScrollToTop";
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
+        <ScrollToTop />
         <AuthWrapper>
           <Routes>
             <Route path="/" element={<HomePage />} />

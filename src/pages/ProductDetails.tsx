@@ -1,4 +1,10 @@
-import { ArrowLeft, Sparkles, Check, ShoppingCart } from "lucide-react";
+import {
+  ArrowLeft,
+  Sparkles,
+  Check,
+  ShoppingCart,
+  ArrowUp,
+} from "lucide-react";
 import { useParams, Link } from "react-router";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
@@ -7,15 +13,21 @@ import { cn } from "../lib/utils";
 import { Badge } from "../components/ui/Badge";
 import { useGetProductQuery } from "../store/features/product";
 import { skipToken } from "@reduxjs/toolkit/query";
+import { useAddToCartMutation, useGetCartQuery } from "../store/cart";
+import { useNavigate } from "react-router";
 
 const ProductDetail = () => {
   const { id } = useParams();
-
   const { data: product, isLoading } = useGetProductQuery(id ?? skipToken);
+  const { data: cart, isLoading: isCartLoading } = useGetCartQuery();
+  const [addToCart] = useAddToCartMutation();
+  const navigate = useNavigate();
 
-  console.log("Product Data:", product);
+  const existsInCart = cart?.items.some(
+    (item) => item.product._id === product?.data?._id
+  );
 
-  if (isLoading) {
+  if (isLoading || isCartLoading) {
     return (
       <div className="min-h-screen bg-background">
         <div className="pt-24 pb-16">
@@ -50,18 +62,31 @@ const ProductDetail = () => {
     );
   }
 
+  const handleAddToCart = async () => {
+    try {
+      await addToCart({
+        productId: product.data?._id as string,
+        quantity: 1,
+      }).unwrap();
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <section className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           {/* Breadcrumb */}
-          <Link
-            to="/shop"
-            className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Shop
-          </Link>
+          <div className="flex items-center gap-4 mb-8 ">
+            <div
+              onClick={() => navigate(-1)}
+              className="cursor-pointer text-muted-foreground hover:text-primary transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </div>
+            <h1 className="font-display text-3xl text-foreground">Back to shop</h1>
+          </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Product Image */}
@@ -142,12 +167,26 @@ const ProductDetail = () => {
                   </span>
                 </div>
 
-                <div className="flex gap-4">
-                  <Button variant="gold" size="lg" className="flex-1">
-                    <ShoppingCart className="w-5 h-5 mr-2" />
-                    Add to Cart
-                  </Button>
-                </div>
+                {existsInCart ? (
+                  <Link to="/cart" className="flex gap-4">
+                    <Button variant="gold" size="lg" className="flex-1">
+                      <ArrowUp className="w-5 h-5 mr-2" />
+                      View in Cart
+                    </Button>
+                  </Link>
+                ) : (
+                  <div className="flex gap-4">
+                    <Button
+                      variant="gold"
+                      size="lg"
+                      className="flex-1"
+                      onClick={handleAddToCart}
+                    >
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                      Add to Cart
+                    </Button>
+                  </div>
+                )}
               </div>
 
               {/* Additional Info */}
