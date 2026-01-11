@@ -20,8 +20,8 @@ const navLinks = [
 
 const loggedInNavLinks = [
   { name: "Home", href: "/shop" },
-  { name: "Orders", href: "/orders" },
-  { name: "Profile", href: "/profile" },
+  // { name: "Orders", href: "/orders" },
+  // { name: "Profile", href: "/profile" },
 ];
 
 const Navbar = () => {
