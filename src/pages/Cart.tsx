@@ -14,7 +14,7 @@ const Cart = () => {
   }
 
   if (!cart || cart.items.length === 0) {
-    <EmptyCart />;
+    return <EmptyCart />;
   }
 
   console.log("Car:", cart);

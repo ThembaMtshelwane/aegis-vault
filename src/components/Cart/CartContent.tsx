@@ -5,6 +5,7 @@ import { CartCard } from "./CartCard";
 import type { ICartItem } from "../../types/cart.types";
 import { OrderSummary } from "../Order/OrderSummary";
 import {
+  useClearCartMutation,
   useDecrementCartItemMutation,
   useIncrementCartItemMutation,
   useRemoveFromCartMutation,
@@ -18,6 +19,7 @@ const CartContent = ({
   const [incrementCartItem] = useIncrementCartItemMutation();
   const [decrementCartItem] = useDecrementCartItemMutation();
   const [removeFromCart] = useRemoveFromCartMutation();
+  const [clearCart] = useClearCartMutation();
 
   const [items, setItems] = useState<ICartItem[]>(initialItems || []);
 
@@ -59,6 +61,14 @@ const CartContent = ({
     }
   };
 
+  const handleClearCart = async () => {
+    setItems([]);
+    await clearCart()
+      .unwrap()
+      .catch((error) => {
+        console.error("Failed to clear cart:", error);
+      });
+  };
   const totalPrice = items.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0
@@ -93,7 +103,7 @@ const CartContent = ({
             <OrderSummary
               items={items}
               totalPrice={totalPrice}
-              onClear={() => setItems([])}
+              onClear={handleClearCart}
             />
           </div>
         </div>
