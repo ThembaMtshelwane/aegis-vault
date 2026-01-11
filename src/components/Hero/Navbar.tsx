@@ -9,11 +9,13 @@ import {
 } from "../../store/features/auth/auth.slice";
 import { useLogoutMutation } from "../../store/features/auth/authApi.slice";
 import type { ApiError } from "../../types/error.types";
+import { useGetCartQuery } from "../../store/cart";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
+  const { data: cart } = useGetCartQuery();
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -63,9 +65,11 @@ const Navbar = () => {
           <div className="flex items-center gap-2 gap-x-6">
             <Link to="/cart" className="relative">
               <ShoppingCart className="w-5 h-5" />
-              {/* <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-display">
-                3
-              </span> */}
+              {cart && cart.items.length && (
+                <span className="absolute -top-2.5 left-5 w-5 h-5 bg-primary text-primary-foreground text-xs rounded-full flex items-center justify-center font-display">
+                  {cart.items.length}
+                </span>
+              )}
             </Link>
 
             {user ? (
