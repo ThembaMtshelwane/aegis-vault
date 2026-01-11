@@ -11,18 +11,24 @@ import { useLogoutMutation } from "../../store/features/auth/authApi.slice";
 import type { ApiError } from "../../types/error.types";
 import { useGetCartQuery } from "../../store/cart";
 
+const navLinks = [
+  { name: "About", href: "#about" },
+  { name: "Artifacts", href: "#featured" },
+  { name: "Categories", href: "#categories" },
+  { name: "Contact", href: "#contact" },
+];
+
+const loggedInNavLinks = [
+  { name: "Home", href: "/shop" },
+  { name: "Orders", href: "/orders" },
+  { name: "Profile", href: "/profile" },
+];
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const { data: cart } = useGetCartQuery();
-
-  const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Artifacts", href: "#featured" },
-    { name: "Categories", href: "#categories" },
-    { name: "Contact", href: "#contact" },
-  ];
 
   const user = useSelector(selectCurrentUser);
   const signOut = async () => {
@@ -50,15 +56,33 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8 text-sm mr-5">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="font-display tracking-wide text-muted-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
-              >
-                {link.name}
-              </a>
-            ))}
+            {user ? (
+              <>
+                {" "}
+                {loggedInNavLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="font-display tracking-wide text-muted-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </>
+            ) : (
+              <>
+                {" "}
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="font-display tracking-wide text-muted-foreground hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </>
+            )}
           </nav>
 
           {/* Actions */}

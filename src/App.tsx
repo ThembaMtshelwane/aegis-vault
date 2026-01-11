@@ -25,6 +25,9 @@ function App() {
               <Route path="/shop" element={<Shop />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/orders" element={<>Orders</>} />
+              <Route path="/orders/:id" element={<>Order Details</>} />
+              <Route path="/profile" element={<>Profile</>} />
             </Route>
           </Routes>
         </AuthWrapper>
