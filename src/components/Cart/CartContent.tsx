@@ -4,25 +4,59 @@ import { ArrowLeft } from "lucide-react";
 import { CartCard } from "./CartCard";
 import type { ICartItem } from "../../types/cart.types";
 import { OrderSummary } from "../Order/OrderSummary";
+import {
+  useDecrementCartItemMutation,
+  useIncrementCartItemMutation,
+  useRemoveFromCartMutation,
+} from "../../store/cart";
 
 const CartContent = ({
   initialItems,
 }: {
   initialItems: ICartItem[] | null;
 }) => {
+  const [incrementCartItem] = useIncrementCartItemMutation();
+  const [decrementCartItem] = useDecrementCartItemMutation();
+  const [removeFromCart] = useRemoveFromCartMutation();
+
   const [items, setItems] = useState<ICartItem[]>(initialItems || []);
 
-  const removeFromCart = (productId: string) => {
+  const handleRemoveItemFromCart = async (productId: string) => {
     setItems((prev) => prev.filter((item) => item.product._id !== productId));
+    await removeFromCart({ productId })
+      .unwrap()
+      .catch((error) => {
+        console.error("Failed to remove item from cart:", error);
+      });
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) return removeFromCart(productId);
-    setItems((prev) =>
-      prev.map((item) =>
-        item.product._id === productId ? { ...item, quantity } : item
-      )
-    );
+  const handleUpdateQuantity = async (
+    productId: string,
+    newQuantity: number,
+    type: "inc" | "dec"
+  ) => {
+    // 1. Instant UI Update (Optimistic)
+    if (newQuantity <= 0) {
+      handleRemoveItemFromCart(productId);
+    } else {
+      setItems((prev) =>
+        prev.map((item) =>
+          item.product._id === productId
+            ? { ...item, quantity: newQuantity }
+            : item
+        )
+      );
+    }
+
+    try {
+      if (type === "inc") {
+        await incrementCartItem({ productId }).unwrap();
+      } else {
+        await decrementCartItem({ productId }).unwrap();
+      }
+    } catch (error) {
+      console.error("Failed to sync with server:", error);
+    }
   };
 
   const totalPrice = items.reduce(
@@ -49,8 +83,8 @@ const CartContent = ({
               <CartCard
                 key={item.product._id}
                 item={item}
-                onRemove={removeFromCart}
-                onUpdateQuantity={updateQuantity}
+                onRemove={handleRemoveItemFromCart}
+                onUpdateQuantity={handleUpdateQuantity}
               />
             ))}
           </div>
