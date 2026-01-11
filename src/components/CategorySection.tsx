@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Button } from "../components/ui/Button";
 import { Gem, BookOpen, Clock, ArrowRight } from "lucide-react";
 
@@ -83,10 +84,12 @@ const CategorySection = () => {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg">
-            View All Collections
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+          <Link to="/shop">
+            <Button variant="outline" size="lg">
+              View All Collections
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

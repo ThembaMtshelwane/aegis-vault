@@ -2,6 +2,7 @@ import heroBg from "../../assets/hero-bg.jpg";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { Button } from "../ui/Button";
 import Navbar from "./Navbar";
+import { Link } from "react-router";
 
 const Hero = () => {
   return (
@@ -14,7 +15,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-linear-to-b from-background/70 via-background/50 to-background" />
       </div>
 
-      <Navbar/>
+      <Navbar />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center pt-20">
@@ -58,13 +59,15 @@ const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in"
             style={{ animationDelay: "0.4s" }}
           >
-            <Button variant="mystic" size="xl">
-              <Sparkles className="w-5 h-5" />
-              Explore Collection
-            </Button>
-            <Button variant="outline" size="lg">
+            <Link to="/shop">
+              <Button variant="mystic" size="xl">
+                <Sparkles className="w-5 h-5" />
+                Explore Collection
+              </Button>
+            </Link>
+            {/* <Button variant="outline" size="lg">
               View New Arrivals
-            </Button>
+            </Button> */}
           </div>
         </div>
 
