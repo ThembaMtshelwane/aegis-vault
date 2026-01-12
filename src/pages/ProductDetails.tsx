@@ -21,7 +21,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const { data: product, isLoading } = useGetProductQuery(id ?? skipToken);
   const { data: cart, isLoading: isCartLoading } = useGetCartQuery();
-  const [addToCart] = useAddToCartMutation();
+  const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
   const navigate = useNavigate();
 
   const existsInCart = cart?.items.some(
@@ -176,9 +176,10 @@ const ProductDetail = () => {
                       size="lg"
                       className="flex-1"
                       onClick={handleAddToCart}
+                      disabled={isAdding}
                     >
                       <ShoppingCart className="w-5 h-5 mr-2" />
-                      Add to Cart
+                      {isAdding ? "Adding..." : "Add to Cart"}
                     </Button>
                   </div>
                 )}

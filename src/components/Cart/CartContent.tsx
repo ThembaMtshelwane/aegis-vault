@@ -10,6 +10,7 @@ import {
   useIncrementCartItemMutation,
   useRemoveFromCartMutation,
 } from "../../store/cart";
+import Loading from "../Loading";
 
 const CartContent = ({
   initialItems,
@@ -19,7 +20,7 @@ const CartContent = ({
   const [incrementCartItem] = useIncrementCartItemMutation();
   const [decrementCartItem] = useDecrementCartItemMutation();
   const [removeFromCart] = useRemoveFromCartMutation();
-  const [clearCart] = useClearCartMutation();
+  const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
   const navigate = useNavigate();
   const [items, setItems] = useState<ICartItem[]>(initialItems || []);
 
@@ -73,6 +74,8 @@ const CartContent = ({
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
+
+  if (isClearing) return <Loading />;
 
   return (
     <div className="min-h-screen bg-background">
