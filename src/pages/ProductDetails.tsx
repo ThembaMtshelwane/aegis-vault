@@ -15,6 +15,7 @@ import { useGetProductQuery } from "../store/features/product";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useAddToCartMutation, useGetCartQuery } from "../store/cart";
 import { useNavigate } from "react-router";
+import Loading from "../components/Loading";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -28,15 +29,7 @@ const ProductDetail = () => {
   );
 
   if (isLoading || isCartLoading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <div className="pt-24 pb-16">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-muted-foreground">Loading item details...</p>
-          </div>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (!product) {
@@ -85,7 +78,9 @@ const ProductDetail = () => {
             >
               <ArrowLeft className="w-5 h-5" />
             </div>
-            <h1 className="font-display text-3xl text-foreground">Back to shop</h1>
+            <h1 className="font-display text-3xl text-foreground">
+              Back to shop
+            </h1>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
