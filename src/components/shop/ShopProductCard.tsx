@@ -13,7 +13,7 @@ interface ShopProductCardProps {
 }
 
 const ShopProductCard = ({ product }: ShopProductCardProps) => {
-  const [addToCart] = useAddToCartMutation();
+  const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
 
   const handleAddToCart = async () => {
     try {
@@ -96,9 +96,10 @@ const ShopProductCard = ({ product }: ShopProductCardProps) => {
             size="sm"
             className="flex-1"
             onClick={handleAddToCart}
+            disabled={isAdding}
           >
             <ShoppingCart className="w-5 h-5 mr-2" />
-            Add to Cart
+            {isAdding ? "Adding..." : "Add to Cart"}
           </Button>
         </div>
       </CardFooter>
