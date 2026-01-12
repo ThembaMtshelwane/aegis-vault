@@ -17,6 +17,7 @@ const Shop = () => {
     search: searchQuery,
     rarity: selectedRarity || undefined,
     category: selectedCategory || undefined,
+    limit: 12,
   });
   const [currentPage, setCurrentPage] = useState(1);
 
