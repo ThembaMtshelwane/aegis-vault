@@ -1,4 +1,4 @@
-import heroBg from "../../assets/hero-bg.jpg";
+import heroBg from "../../assets/hero-bg.webp";
 import { ChevronDown, Sparkles } from "lucide-react";
 import { Button } from "../ui/Button";
 import Navbar from "./Navbar";

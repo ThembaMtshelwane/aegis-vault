@@ -1,10 +1,13 @@
 import { Sparkles } from "lucide-react";
 import ShopProductCard from "../shop/ShopProductCard";
 import { useGetProductsQuery } from "../../store/features/product";
+import Loading from "../Loading";
 
 const FeaturedProducts = () => {
   const { data: productsData, isLoading, error } = useGetProductsQuery({});
   const featured = productsData?.data?.data?.slice(0, 3) || [];
+
+  if (isLoading) return <Loading />;
 
   return (
     <section id="featured" className="py-20 md:py-28 bg-mystic-pattern">
@@ -26,13 +29,7 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Products Grid */}
-        {isLoading ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              Loading featured products...
-            </p>
-          </div>
-        ) : error ? (
+        {error ? (
           <div className="text-center py-12">
             <p className="text-destructive mb-2">Failed to load products</p>
             <p className="text-sm text-muted-foreground">
