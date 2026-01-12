@@ -2,7 +2,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api",
+    // baseUrl: "http://localhost:5000/api",
+    baseUrl: "https://aegis-vault-server.vercel.app/api",
+    prepareHeaders: (headers) => {
+      return headers;
+    },
     credentials: "include",
   }),
   tagTypes: ["User", "Product", "Cart"],

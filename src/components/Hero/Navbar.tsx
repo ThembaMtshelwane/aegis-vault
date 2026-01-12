@@ -2,7 +2,7 @@ import { ShoppingCart, Menu, Sparkles, LogOut, LogIn } from "lucide-react";
 import { Button } from "../../components/ui/Button";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   logOut,
   selectCurrentUser,
@@ -29,19 +29,21 @@ const Navbar = () => {
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const { data: cart } = useGetCartQuery();
-
+  const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
+
   const signOut = async () => {
     try {
       const res = await logout();
       console.log(res);
-      logOut();
+      dispatch(logOut());
       navigate("/");
     } catch (error) {
       console.log((error as ApiError).data.message);
     }
   };
 
+  console.log("user  ", user);
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="px-4 mx-auto border">

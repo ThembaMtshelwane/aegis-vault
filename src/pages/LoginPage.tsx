@@ -16,11 +16,13 @@ import type { LoginCredentials } from "../types/auth.types";
 import type { ApiError } from "../types/error.types";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/features/auth/auth.slice";
+import { useState } from "react";
 
 const LoginPage = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const { register, handleSubmit } = useForm<LoginCredentials>({
     defaultValues: {
@@ -33,9 +35,11 @@ const LoginPage = () => {
     try {
       const userData = await login(data).unwrap();
       dispatch(setCredentials(userData));
+      console.log("Login successful", userData);
       navigate("/shop");
     } catch (error) {
       console.log("error");
+      setErrorMessage("Invalid email or password.");
       console.log((error as ApiError).data.message);
     }
   };
@@ -64,6 +68,11 @@ const LoginPage = () => {
         </CardHeader>
 
         <CardContent>
+          {errorMessage && (
+            <div className="mb-4 p-3 bg-red-100 text-red-800 rounded">
+              {errorMessage}
+            </div>
+          )}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-foreground">

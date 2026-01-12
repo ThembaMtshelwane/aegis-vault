@@ -1,9 +1,5 @@
 import { Label } from "../components/ui/Label";
-import {
-  ArrowLeft,
-  ScrollText,
-  Shield,
-} from "lucide-react";
+import { ArrowLeft, ScrollText, Shield } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import {
   Card,
@@ -13,8 +9,11 @@ import {
   CardContent,
 } from "../components/ui/Card";
 import { Input } from "../components/ui/Input";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useRegisterUserMutation } from "../store/features/auth/authApi.slice";
+import type { ApiError } from "../types/error.types";
 
 interface FormData {
   firstName: string;
@@ -23,6 +22,10 @@ interface FormData {
   password: string;
 }
 const SignUpPage = () => {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm<FormData>({
     defaultValues: {
       firstName: "",
@@ -32,7 +35,17 @@ const SignUpPage = () => {
     },
   });
 
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const res = await registerUser(data).unwrap();
+      console.log("Registration successful", res);
+      navigate("/shop");
+    } catch (error) {
+      console.log("error  ", error);
+      setErrorMessage((error as ApiError).data.message);
+      console.log((error as ApiError).data.message);
+    }
+  };
 
   return (
     <div className=" min-h-screen bg-background bg-mystic-pattern flex items-center justify-center p-4">
@@ -58,6 +71,11 @@ const SignUpPage = () => {
         </CardHeader>
 
         <CardContent>
+          {errorMessage && (
+            <div className="mb-4 p-3 bg-red-100 text-red-800 rounded">
+              {errorMessage}
+            </div>
+          )}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-foreground">
@@ -113,7 +131,7 @@ const SignUpPage = () => {
               type="submit"
               className="w-full"
               variant="mystic"
-              //   disabled={isSubmitting}
+              disabled={isLoading}
             >
               <ScrollText className="mr-2 h-4 w-4" />
               Join the Guild

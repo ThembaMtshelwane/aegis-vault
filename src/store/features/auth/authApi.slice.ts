@@ -24,8 +24,20 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    registerUser: builder.mutation<User, Partial<User>>({
+      query: (formData) => ({
+        url: `${AUTH_URL}/register`,
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const { useLoginMutation, useGetMeQuery, useLogoutMutation } =
-  authApiSlice;
+export const {
+  useLoginMutation,
+  useGetMeQuery,
+  useLogoutMutation,
+  useRegisterUserMutation,
+} = authApiSlice;
