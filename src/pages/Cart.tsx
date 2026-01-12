@@ -1,16 +1,13 @@
 import { useGetCartQuery } from "../store/cart";
 import EmptyCart from "../components/Cart/EmptyCart";
 import CartContent from "../components/Cart/CartContent";
+import Loading from "../components/Loading";
 
 const Cart = () => {
   const { data: cart, isLoading } = useGetCartQuery();
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <Loading />;
   }
 
   if (!cart || cart.items.length === 0) {

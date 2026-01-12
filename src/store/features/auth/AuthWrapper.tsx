@@ -2,14 +2,15 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useGetMeQuery } from "./authApi.slice";
 import { logOut, setCredentials } from "./auth.slice";
+import Loading from "../../../components/Loading";
 
 interface AuthWrapperProps {
   children: React.ReactNode;
 }
 
 const AuthWrapper = ({ children }: AuthWrapperProps) => {
-    const dispatch = useDispatch();
-    
+  const dispatch = useDispatch();
+
   // This hook runs automatically on mount
   // It sends the Secure Cookie to the /auth/me endpoint
   const { data, isLoading, isError, isSuccess } = useGetMeQuery();
@@ -26,11 +27,7 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
 
   if (isLoading) {
     // Show a loading spinner or a blank screen to prevent "UI flicker"
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <p>Initializing App...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return <>{children}</>;

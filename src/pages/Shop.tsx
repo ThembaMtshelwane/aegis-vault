@@ -5,6 +5,7 @@ import ShopProductCard from "../components/shop/ShopProductCard";
 import { useGetProductsQuery } from "../store/features/product";
 import type { ItemType, Rarity } from "../types/product.types";
 import Pagination from "../components/ui/Pagination";
+import Loading from "../components/Loading";
 
 const Shop = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,6 +54,8 @@ const Shop = () => {
     setCurrentPage(1);
   };
 
+  if (isLoading) return <Loading />;
+
   return (
     <div className="min-h-screen bg-background">
       <div className="pt-24 pb-16">
@@ -89,7 +92,6 @@ const Shop = () => {
               </div>
             </aside>
 
-            {isLoading && <p>Loading products...</p>}
             {/* Products Grid */}
             <section className="lg:col-span-3">
               <div className="flex justify-between items-center mb-6">
