@@ -26,7 +26,7 @@ const loggedInNavLinks = [
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logout] = useLogoutMutation();
+  const [logout, { isLoading: isLoggingOut }] = useLogoutMutation();
   const navigate = useNavigate();
   const { data: cart } = useGetCartQuery();
   const dispatch = useDispatch();
@@ -34,16 +34,15 @@ const Navbar = () => {
 
   const signOut = async () => {
     try {
-      const res = await logout();
-      console.log(res);
+      await logout().unwrap();
       dispatch(logOut());
       navigate("/");
     } catch (error) {
-      console.log((error as ApiError).data.message);
+      console.error((error as ApiError).data.message);
+      navigate("/");
     }
   };
 
-  console.log("user  ", user);
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="px-4 mx-auto border">
@@ -103,10 +102,11 @@ const Navbar = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => signOut()}
+                disabled={isLoggingOut}
                 className="hidden md:flex items-center gap-2"
               >
                 <LogOut className="w-4 h-4" />
-                Sign Out
+                {isLoggingOut ? "Signing Out..." : "Sign Out"}
               </Button>
             ) : (
               <Button
@@ -136,16 +136,33 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="md:hidden py-4 border-t border-border animate-fade-in">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="block py-3 font-display text-sm tracking-wide text-muted-foreground hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
+            {user ? (
+              <>
+                {loggedInNavLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="block py-3 font-display text-sm tracking-wide text-muted-foreground hover:text-primary transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </>
+            ) : (
+              <>
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="block py-3 font-display text-sm tracking-wide text-muted-foreground hover:text-primary transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </>
+            )}
             <div className="pt-3 border-t border-border mt-3">
               {user ? (
                 <button

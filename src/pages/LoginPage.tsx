@@ -17,6 +17,7 @@ import type { ApiError } from "../types/error.types";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/features/auth/auth.slice";
 import { useState } from "react";
+import type { User } from "../types/user.types";
 
 const LoginPage = () => {
   const [login, { isLoading }] = useLoginMutation();
@@ -33,14 +34,12 @@ const LoginPage = () => {
 
   const onSubmit = async (data: LoginCredentials) => {
     try {
-      const userData = await login(data).unwrap();
-      dispatch(setCredentials(userData));
-      console.log("Login successful", userData);
+      const { data: userData } = await login(data).unwrap();
+      dispatch(setCredentials(userData?.user as User));
       navigate("/shop");
     } catch (error) {
-      console.log("error");
-      setErrorMessage("Invalid email or password.");
-      console.log((error as ApiError).data.message);
+      console.error(error);
+      setErrorMessage((error as ApiError).data.message);
     }
   };
 

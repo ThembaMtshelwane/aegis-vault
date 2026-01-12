@@ -2,8 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:5000/api",
-    baseUrl: "https://aegis-vault-server.vercel.app/api",
+    baseUrl: import.meta.env.VITE_SERVER_API || "http://localhost:5000/api",
     prepareHeaders: (headers) => {
       return headers;
     },
