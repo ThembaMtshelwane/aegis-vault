@@ -14,6 +14,9 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRegisterUserMutation } from "../store/features/auth/authApi.slice";
 import type { ApiError } from "../types/error.types";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/features/auth/auth.slice";
+import type { User } from "../types/user.types";
 
 interface FormData {
   firstName: string;
@@ -25,6 +28,7 @@ const SignUpPage = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [registerUser, { isLoading }] = useRegisterUserMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm<FormData>({
     defaultValues: {
@@ -37,8 +41,9 @@ const SignUpPage = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const res = await registerUser(data).unwrap();
-      console.log("Registration successful", res);
+      const { data: userData } = await registerUser(data).unwrap();
+      console.log("Registration successful", userData);
+      dispatch(setCredentials(userData?.user as User));
       navigate("/shop");
     } catch (error) {
       console.log("error  ", error);

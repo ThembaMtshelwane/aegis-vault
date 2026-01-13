@@ -25,7 +25,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
-    registerUser: builder.mutation<User, Partial<User>>({
+    registerUser: builder.mutation<ApiResponse<{ user: User }>, Partial<User>>({
       query: (formData) => ({
         url: `${AUTH_URL}/register`,
         method: "POST",
