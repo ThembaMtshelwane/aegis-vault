@@ -1,5 +1,5 @@
 import { useGetCartQuery } from "../store/cart";
-import EmptyCart from "../components/Cart/EmptyCart";
+import Empty from "../components/ui/Empty";
 import CartContent from "../components/Cart/CartContent";
 import Loading from "../components/Loading";
 
@@ -11,7 +11,7 @@ const Cart = () => {
   }
 
   if (!cart || cart.items.length === 0) {
-    return <EmptyCart />;
+    return <Empty name="Your cart is empty" />;
   }
 
   return <CartContent initialItems={cart?.items || []} />;

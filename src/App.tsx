@@ -10,6 +10,8 @@ import { Provider } from "react-redux";
 import { store } from "./store/app/store";
 import AuthWrapper from "./store/features/auth/AuthWrapper";
 import ScrollToTop from "./components/ui/ScrollToTop";
+import Orders from "./pages/Orders";
+import OrderDetails from "./pages/OrderDetails";
 // import Orders from "./pages/Orders";
 // import OrderDetails from "./pages/OrderDetails";
 // import Profile from "./pages/Profile";
@@ -29,8 +31,8 @@ function App() {
               <Route path="/shop" element={<Shop />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/products/:id" element={<ProductDetail />} />
-              {/* <Route path="/orders" element={<Orders />} /> */}
-              {/* <Route path="/orders/:id" element={<OrderDetails />} /> */}
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/:id" element={<OrderDetails />} />
               {/* <Route path="/profile" element={<Profile />} /> */}
             </Route>
           </Routes>

@@ -1,37 +1,14 @@
-import type { IOrder } from "../components/Order/OrderCard";
+import Empty from "../components/ui/Empty";
 import OrdersContent from "../components/Order/OrderContent";
+import { orders } from "../types/order.types";
 
 const Orders = () => {
-  //   const { data: orders, isLoading } = useGetOrdersQuery();
 
-  //   if (isLoading) {
-  //     return (
-  //       <div className="min-h-screen flex items-center justify-center">
-  //         <p className="text-muted-foreground animate-shimmer">
-  //           Consulting the archives...
-  //         </p>
-  //       </div>
-  //     );
-  //   }
+  // const orders: IOrder[] = [];
 
-  const orders: IOrder[] = [
-    {
-      _id: "123456",
-      createdAt: "2023-01-01T00:00:00Z",
-      totalPrice: 123.45,
-      status: "delivered",
-    },
-    {
-      _id: "789012",
-      createdAt: "2023-02-15T00:00:00Z",
-      totalPrice: 678.9,
-      status: "shipped",
-    },
-  ];
-
-  //   if (!orders || orders.length === 0) {
-  //     return <EmptyOrders />;
-  //   }
+  if (!orders || orders.length === 0) {
+    return <Empty name={"Your order history is empty"} />;
+  }
 
   return <OrdersContent initialOrders={orders} />;
 };

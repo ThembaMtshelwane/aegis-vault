@@ -1,13 +1,8 @@
 import { Card } from "../ui/Card";
 import { ChevronRight, Package } from "lucide-react";
 import { Link } from "react-router";
+import type { IOrder } from "../../types/order.types";
 
-export interface IOrder {
-  _id: string;
-  createdAt: string;
-  totalPrice: number;
-  status: "pending" | "shipped" | "delivered" | "cancelled";
-}
 interface OrderCardProps {
   order: IOrder;
 }
