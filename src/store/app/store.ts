@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api.slice";
 import authReducer from "../features/auth/auth.slice";
+import { refreshTokenMiddleware } from "../../middleware/refreshToken.middleware";
 
 export const store = configureStore({
   reducer: {
@@ -8,7 +9,9 @@ export const store = configureStore({
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware()
+      .concat(apiSlice.middleware)
+      .concat(refreshTokenMiddleware),
   devTools: true,
 });
 

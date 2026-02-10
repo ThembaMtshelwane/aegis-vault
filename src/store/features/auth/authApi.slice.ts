@@ -33,6 +33,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    refresh: builder.mutation<void, void>({
+      query: () => ({
+        url: `${AUTH_URL}/refresh`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -41,4 +47,5 @@ export const {
   useGetMeQuery,
   useLogoutMutation,
   useRegisterUserMutation,
+  useRefreshMutation
 } = authApiSlice;
